@@ -21,8 +21,8 @@ urlRadio.addEventListener("click", e => {
 });
 
 fileRadio.addEventListener("click", e => {
-	urlInput.toggleAttribute("hidden");
-	browseFile.toggleAttribute("hidden");
+	urlInput.setAttribute("hidden", "");
+	browseFile.removeAttribute("hidden");
 
 	loadFile = true;
 });
