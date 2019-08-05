@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="script.js" defer></script>
+</head>
+
+<body>
+	<div id="layout">
+		<header>
+			<input id="urlRadio" type="radio" name="group1">Url
+			<input id="fileRadio" type="radio" name="group1" checked>File
+
+			<input id="fileBrowser" type="file" hidden>
+			<input id="url" type="text" placeholder="paste url" hidden>
+
+			<button id="browseFile">...</button>
+
+			<button id="convert">
+				<span style="color: #c5c576;">ToArray<span style="color: black;">&lt;</span><span style="color: #466dde;">byte</span><span style="color: black;">&gt;</span><span style="color: black;">();</span></span>
+			</button>
+		</header>
+		<textarea id="output"></textarea>
+	</div>
+</body>
+
+</html>
