@@ -8,14 +8,17 @@ const urlInput = document.getElementById("url");
 const convert = document.getElementById("convert");
 const output = document.getElementById("output");
 
+const copy = document.getElementById('copy-to-clipboard');
+const save = document.getElementById('save-to-file-a');
+
 let loadFile = true;
 
 let canvas = null;
 let imageData = null;
 
 urlRadio.addEventListener("click", e => {
-	urlInput.toggleAttribute("hidden");
-	browseFile.toggleAttribute("hidden");
+	urlInput.removeAttribute("hidden");
+	browseFile.setAttribute("hidden", "");
 
 	loadFile = false;
 });
@@ -84,6 +87,15 @@ fileBrowser.addEventListener("input", e => {
 
 convert.addEventListener("click", toArray);
 
+copy.addEventListener("click", e => {
+	navigator.permissions.query({ name: 'clipboard-write' })
+	.then(result => {
+		if (result.state == 'granted' || result.state == 'prompt') {
+			navigator.clipboard.writeText(output.innerText);
+		}
+	}, err => console.error(err));
+});
+
 function toArray() {
 	if (imageData) {
 		let { width, height, data } = imageData;
@@ -108,7 +120,13 @@ function toArray() {
 
 		outputString += "};";
 
-		output.value = outputString;
+		output.innerHTML = outputString;
+		hljs.highlightBlock(output.parentElement);
+
+
+		URL.revokeObjectURL(save.href);
+		let blob = new Blob([output.innerText], { type: "text/plain" });
+		save.href = URL.createObjectURL(blob);
 
 		delete imageData;
 	}

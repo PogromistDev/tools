@@ -4,7 +4,7 @@ body {
 
 #layout {
 	display: grid;
-	grid-template-rows: 48px 1fr;
+	grid-template-rows: 58px 1fr;
 	align-items: center;
 	width: 100vw;
 	height: 100vh;
@@ -16,7 +16,7 @@ header {
 
 	align-items: center;
 
-	padding-left: 10px;
+	padding: 0px 20px;
 
 	width: 100%;
 	height: 100%;
@@ -51,18 +51,18 @@ header {
 	background: rgb(232, 232, 232);
 }
 
-#output {
+#pre-output {
 	box-sizing: border-box;
 	padding: 20px;
 	width: 100%;
 	height: 100%;
-	resize: none;
+	border-top: 2px solid lightseagreen;
 }
 
 button {
 	outline: none;
 	padding: 0 15px;
-	margin-left: 5px;
+	margin-left: 10px;
 	height: 32px;
 	border-radius: 16px;
 	background: rgb(255, 255, 255);
@@ -72,4 +72,8 @@ button {
 
 button:active {
 	background: rgb(232, 232, 232);
+}
+
+#save-to-file-a {
+	margin-left: auto;
 }
