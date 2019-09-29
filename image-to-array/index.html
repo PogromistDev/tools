@@ -11,25 +11,27 @@
 </head>
 
 <body>
-	<div id="layout">
-		<header>
-			<input id="urlRadio" type="radio" name="group1">Url
-			<input id="fileRadio" type="radio" name="group1" checked>File
+	<header>
+		<input id="urlRadio" type="radio" name="group1">Url
+		<input id="fileRadio" type="radio" name="group1" checked>File
 
-			<input id="fileBrowser" type="file" hidden>
-			<input id="url" type="text" placeholder="paste url" hidden>
+		<input id="fileBrowser" type="file" hidden>
+		<input id="url" type="text" placeholder="paste url" hidden>
 
-			<button id="browseFile">...</button>
+		<button id="browseFile">...</button>
 
-			<button id="convert">
-				<span style="color: #c5c576;">ToArray<span style="color: black;">&lt;<span style="color: #466dde;">byte</span>&gt;();</span></span>
-			</button>
+		<button id="convert">
+			<span style="color: #c5c576;">ToArray<span style="color: black;">&lt;<span
+						style="color: #466dde;">byte</span>&gt;();</span></span>
+		</button>
 
-			<a id="save-to-file-a" download="image-array.hpp"><button id="save-to-file">save to file</button></a>
-			<button id="copy-to-clipboard">copy to clipboard</button>
-		</header>
-		<pre id="pre-output"><code id="output" class="cpp"></code></pre>
-	</div>
+		<label style="margin-left: 16px;"><input id="highlightCheckbox" type="checkbox">Syntax highlighting</label>
+
+		<a id="save-to-file-a" download="image-array.hpp"><button id="save-to-file">save to file</button></a>
+		<button id="copy-to-clipboard">copy to clipboard</button>
+	</header>
+
+	<pre id="pre-output"><code id="output" class="cpp"></code></pre>
 </body>
 
 </html>

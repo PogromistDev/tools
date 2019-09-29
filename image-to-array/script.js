@@ -6,7 +6,9 @@ const browseFile = document.getElementById("browseFile");
 
 const urlInput = document.getElementById("url");
 const convert = document.getElementById("convert");
-const output = document.getElementById("output");
+let output = document.getElementById("output");
+
+const highlightCheckbox = document.getElementById("highlightCheckbox");
 
 const copy = document.getElementById('copy-to-clipboard');
 const save = document.getElementById('save-to-file-a');
@@ -121,13 +123,15 @@ function toArray() {
 		outputString += "};";
 
 		output.innerHTML = outputString;
-		hljs.highlightBlock(output.parentElement);
-
+		if (highlightCheckbox.checked) {
+			hljs.highlightBlock(output.parentElement);
+		}
 
 		URL.revokeObjectURL(save.href);
 		let blob = new Blob([output.innerText], { type: "text/plain" });
 		save.href = URL.createObjectURL(blob);
 
+		output = document.getElementById("output");
 		delete imageData;
 	}
 }
