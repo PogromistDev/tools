@@ -17,11 +17,21 @@ header {
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
-	padding: 0px 20px;
+	padding-right: 20px;
 	width: 100%;
 	height: 58px;
 	border-bottom: 2px solid lightseagreen;
 	background: white;
+}
+
+#main-page-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-right: 2px solid lightseagreen;
+	width: 96px;
+	height: 58px;
+	margin-right: 20px;"
 }
 
 #fileRadio, #fileBrowser {

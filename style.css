@@ -1,0 +1,31 @@
+body {
+	margin: 50px;
+	background-color: #f1f1f1;
+}
+
+#container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+#whatitis {
+	font-size: 8vw;
+	color: #95a5a6;
+	font-family: monospace;
+}
+
+.tool {
+	display: inline-flex;
+	align-items: center;
+	padding: 20px;
+	margin: 20px 0px;
+	border-radius: 32px;
+	background: #eaeaea;
+	cursor: pointer;
+	transition: .5s;
+}
+
+.tool:hover {
+	background: #dadada;
+}
