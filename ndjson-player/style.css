@@ -1,0 +1,18 @@
+body {
+	margin: 0px;
+}
+
+header {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+}
+
+canvas {
+	border-top: 1px solid gray;
+}
+
+.space {
+	display: inline-block;
+	width: 32px;
+}
