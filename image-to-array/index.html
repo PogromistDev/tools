@@ -3,16 +3,17 @@
 <head>
 	<title>PogromistDev - Tools - Image to array</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/default.min.css">
-	<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/highlight.min.js"></script>
 
+	<link rel="stylesheet" type="text/css" href="../styles.css">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/default.min.css">
+
+	<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/highlight.min.js"></script>
 	<script src="script.js" defer></script>
 </head>
 <body>
-	<header>
+	<header style="position: fixed; left: 0px; top: 0px;">
 		<div id="main-page-container">
-			<a href="/tools/"><button style="margin: 0px;">tools</button></a>
+			<a href="../"><button style="margin: 0px;">tools</button></a>
 		</div>
 		<input id="urlRadio" type="radio" name="group1">Url
 		<input id="fileRadio" type="radio" name="group1" checked>File
@@ -28,8 +29,9 @@
 		</button>
 
 		<label style="margin-left: 16px;"><input id="highlightCheckbox" type="checkbox">Syntax highlighting</label>
+		<label style="margin-left: 16px;"><input id="downloadImmediatelyCheckbox" type="checkbox">Download immediately</label>
 
-		<a id="save-to-file-a" download="image-array.hpp"><button id="save-to-file">save to file</button></a>
+		<a id="save-to-file-a" download="image-array.hpp" style="margin-left: auto;"><button id="save-to-file">save to file</button></a>
 		<button id="copy-to-clipboard">copy to clipboard</button>
 	</header>
 

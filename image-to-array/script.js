@@ -9,6 +9,7 @@ const convert = document.getElementById("convert");
 let output = document.getElementById("output");
 
 const highlightCheckbox = document.getElementById("highlightCheckbox");
+const downloadImmediatelyCheckbox = document.getElementById("downloadImmediatelyCheckbox");
 
 const copy = document.getElementById('copy-to-clipboard');
 const save = document.getElementById('save-to-file-a');
@@ -33,26 +34,26 @@ fileRadio.addEventListener("click", e => {
 });
 
 urlInput.addEventListener("keydown", e => {
-	if (e.which == 13) {
+	if (e.key == "Enter") {
 		const image = new Image();
 		image.crossOrigin = "Anonymous";
 
 		image.addEventListener("load", () => {
 			canvas = document.createElement("canvas");
-			canvas.width = image.width;
-			canvas.height = image.height;
+			canvas.width = image.naturalWidth;
+			canvas.height = image.naturalHeight;
 
 			const ctx = canvas.getContext("2d");
 			ctx.drawImage(image, 0, 0);
 
-			imageData = ctx.getImageData(0, 0, image.width, image.height);
+			imageData = ctx.getImageData(0, 0, image.naturalWidth, image.naturalHeight);
 
 			delete canvas;
 			delete image;
 		});
 
-		image.addEventListener("error", e => {
-			console.error(e);
+		image.addEventListener("error", err => {
+			console.error(err);
 		});
 
 		image.src = urlInput.value;
@@ -91,47 +92,63 @@ convert.addEventListener("click", toArray);
 
 copy.addEventListener("click", e => {
 	navigator.permissions.query({ name: 'clipboard-write' })
-	.then(result => {
-		if (result.state == 'granted' || result.state == 'prompt') {
-			navigator.clipboard.writeText(output.innerText);
-		}
-	}, err => console.error(err));
+		.then(result => {
+			if (result.state == 'granted' || result.state == 'prompt') {
+				navigator.clipboard.writeText(output.innerText);
+			}
+		}, err => console.error(err));
 });
 
 function toArray() {
 	if (imageData) {
 		let { width, height, data } = imageData;
-		// let uint8View = new Uint8Array(data);
 
-		let outputString = `using pixel = unsigned char;\nconst unsigned int imageWidth = ${width};\nconst unsigned int imageHeight = ${height};\nconst pixel bits = 32;\n\npixel imageArray[imageWidth * imageHeight * bits] = {\n`;
+		// code generation
+		let lines = [];
+
+		lines.push(
+			"using pixel = unsigned char;",
+			`const unsigned int imageWidth = ${width};`,
+			`const unsigned int imageHeight = ${height};`,
+			"const pixel bits = 32;", "",
+			"pixel imageArray[imageWidth * imageHeight * bits] = {"
+		);
 
 		let i = 0, offset;
 
-		for (let y = 0; y < height; y++) {
-			for (let x = 0; x < width; x++) {
-				offset = i * 4;
+		const off = (i, size, off) => i * 4 + off;
 
-				outputString += `\t0x${data[offset].toString("16")}, ` +
-					`0x${data[offset + 1].toString("16")}, ` +
-					`0x${data[offset + 2].toString("16")}, ` +
-					`0x${data[offset + 3].toString("16")},\n`;
+		for (let i = 0; i < width * height; i++) {
 
-				i++;
+			lines.push(
+				`\t0x${data[off(i, 4, 0)].toString("16")}, ` +
+				`0x${data[off(i, 4, 1)].toString("16")}, ` +
+				`0x${data[off(i, 4, 2)].toString("16")}, ` +
+				`0x${data[off(i, 4, 3)].toString("16")},`,
+			);
+		}
+
+		lines.push("};");
+
+		//
+
+		if (!downloadImmediatelyCheckbox.checked) {
+			output.innerHTML = lines.join("\n");
+
+			if (highlightCheckbox.checked) {
+				hljs.highlightBlock(output.parentElement);
 			}
+
+			URL.revokeObjectURL(save.href);
+			let blob = new Blob([output.innerText], { type: "text/plain" });
+			save.href = URL.createObjectURL(blob);
+			delete imageData;
+		} else {
+			URL.revokeObjectURL(save.href);
+			let blob = new Blob([lines.join("\n")], { type: "text/plain" });
+			save.href = URL.createObjectURL(blob);
+			save.click();
+			delete imageData;
 		}
-
-		outputString += "};";
-
-		output.innerHTML = outputString;
-		if (highlightCheckbox.checked) {
-			hljs.highlightBlock(output.parentElement);
-		}
-
-		URL.revokeObjectURL(save.href);
-		let blob = new Blob([output.innerText], { type: "text/plain" });
-		save.href = URL.createObjectURL(blob);
-
-		output = document.getElementById("output");
-		delete imageData;
 	}
 }

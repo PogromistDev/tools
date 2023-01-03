@@ -3,15 +3,15 @@ const file = document.getElementById("file");
 const drawBtn = document.getElementById("draw");
 
 var canvas = document.createElement("canvas");
-var context = canvas.getContext("2d");
+var ctx = canvas.getContext("2d");
 
 var things = [];
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = 640;
+canvas.height = 640;
 
-canvas.style.paddingLeft = "50px";
-canvas.style.paddingTop = "50px";
+canvas.style.marginLeft = "58px";
+canvas.style.marginTop = "58px";
 
 document.body.appendChild(canvas);
 
@@ -25,8 +25,8 @@ file.addEventListener("change", () => {
 		var thingsJSON = fr.result.split("\n");
 
 		for (let thing of thingsJSON) {
-			try 
-			{	
+			try
+			{
 				let thingJSON = JSON.parse(thing);
 				if (thingJSON) {
 					things.push(thingJSON);
@@ -60,22 +60,23 @@ drawBtn.onclick = function() {
 }
 
 function draw(things, number) {
-	context.fillStyle = "white";
-	context.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "white";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-	context.fillStyle = "black";
+	ctx.fillStyle = "black";
 
-	context.beginPath();
+	ctx.beginPath();
 
 	for (let stroke of things.drawing) {
-		context.moveTo(stroke[0][0], stroke[1][0]);
+		ctx.moveTo(stroke[0][0], stroke[1][0]);
 		for (let j = 0; j < stroke[0].length-1; j++) {
-			context.lineTo(stroke[0][1 + j], stroke[1][1 + j]);
+			ctx.lineTo(stroke[0][1 + j], stroke[1][1 + j]);
 		}
 	}
 
-	context.stroke();
+	ctx.stroke();
 
-	context.fillText(number, 300, 128);
-	context.resetTransform();
+	ctx.font = "bold 24px serif";
+	ctx.fillText(number, 300, 128);
+	ctx.resetTransform();
 }
