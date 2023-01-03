@@ -1,5 +1,6 @@
 body {
 	margin: 0px;
+	overflow-x: hidden;
 }
 
 #layout {
@@ -11,9 +12,6 @@ body {
 }
 
 header {
-	position: fixed;
-	left: 0px;
-	top: 0px;
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
@@ -31,7 +29,7 @@ header {
 	border-right: 2px solid lightseagreen;
 	width: 96px;
 	height: 58px;
-	margin-right: 20px;"
+	margin-right: 20px;
 }
 
 #fileRadio, #fileBrowser {
@@ -82,10 +80,10 @@ button {
 	border: 1px solid lightgray;
 }
 
-button:active {
+button:active:enabled {
 	background: rgb(232, 232, 232);
 }
 
-#save-to-file-a {
-	margin-left: auto;
+button:disabled {
+	color: rgb(232, 232, 232);;
 }
