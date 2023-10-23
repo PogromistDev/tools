@@ -110,8 +110,8 @@ function toArray() {
 			"using pixel = unsigned char;",
 			`const unsigned int imageWidth = ${width};`,
 			`const unsigned int imageHeight = ${height};`,
-			"const pixel bits = 32;", "",
-			"pixel imageArray[imageWidth * imageHeight * bits] = {"
+			"const pixel bytes = 4;", "",
+			"pixel imageArray[imageWidth * imageHeight * bytes] = {"
 		);
 
 		let i = 0, offset;
