@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>PogromistDev - Tools - Image to array</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="../styles.css">
+	<link rel="stylesheet" href="./style.css">
+	<script src="script.js" defer></script>
+</head>
+
+<body>
+	<header>
+		<div id="main-page-container">
+			<a href="../"><button style="margin: 0px;">tools</button></a>
+		</div>
+
+		Size: <input id="range" type="range" min="10" max="1000" value="100" />
+		Emoji: <button id="emoji">😂</button>
+		<a id="save-to-file-a" download="" style="margin-left: auto;"><button id="save-to-file">save to
+				file</button></a>
+		<button id="copy-to-clipboard">copy to clipboard</button>
+	</header>
+	<div id="shadow" style="display: none;">
+	<div id="emoji-picker">
+		<div id="custom-block">
+			Custom: <input id="custom" type="text" value="🖋️">
+		</div>
+		<div id="emoji-container">
+			<!-- <button class="emoji">😁</button> -->
+		</div>
+	</div>
+	</div>	
+	<canvas id="canvas"></canvas>
+</body>
+
+</html>
