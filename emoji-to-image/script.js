@@ -5,6 +5,7 @@ const range = document.getElementById("range");
 
 const emoji = document.getElementById("emoji");
 const shadow = document.getElementById("shadow");
+const emojiPickerWrapper = document.getElementById("emoji-picker-wrapper");
 const emojiPicker = document.getElementById("emoji-picker");
 const emojiContainer = document.getElementById("emoji-container");
 
@@ -20,136 +21,7 @@ canvas.height = 480;
 
 var scale = 100;
 const emojis = [
-	'😀',
-	'😁',
-	'😂',
-	'😂',
-	'🤣',
-	'😃',
-	'😄',
-	'😅',
-	'😆',
-	'😉',
-	'😊',
-	'😋',
-	'😎',
-	'😍',
-	'😘',
-	'🥰',
-	'😗',
-	'😙',
-	'🥲',
-	'😚',
-	'🙂',
-	'🤗',
-	'🤩',
-	'🤔',
-	'🫡',
-	'🤨',
-	'😐',
-	'😑',
-	'😶',
-	'🫥',
-	'😶‍🌫️',
-	'🙄',
-	'😏',
-	'😣',
-	'😥',
-	'😮',
-	'🤐',
-	'😯',
-	'😪',
-	'😫',
-	'🥱',
-	'😴',
-	'😌',
-	'😛',
-	'😜',
-	'😝',
-	'🤤',
-	'😒',
-	'😓',
-	'😔',
-	'😕',
-	'🫤',
-	'🙃',
-	'🫠',
-	'🤑',
-	'😲',
-	'☹️',
-	'🙁',
-	'😖',
-	'😞',
-	'😟',
-	'😤',
-	'😢',
-	'😭',
-	'😦',
-	'😧',
-	'😨',
-	'😩',
-	'🤯',
-	'😬',
-	'😮‍💨',
-	'😰',
-	'😱',
-	'🥵',
-	'🥶',
-	'😳',
-	'🤪',
-	'😵',
-	'😵‍💫',
-	'🥴',
-	'😠',
-	'😡',
-	'🤬',
-	'😷',
-	'🤒',
-	'🤕',
-	'🤢',
-	'🤮',
-	'🤧',
-	'😇',
-	'🥳',
-	'🥸',
-	'🥺',
-	'🥹',
-	'🤠',
-	'🤡',
-	'🤥',
-	'🫨',
-	'🤫',
-	'🤭',
-	'🫢',
-	'🫣',
-	'🧐',
-	'😈',
-	'👿',
-	'👹',
-	'👺',
-	'💀',
-	'☠️',
-	'👻',
-	'👽',
-	'👾',
-	'🤖',
-	'💩',
-	'😺',
-	'😸',
-	'😹',
-	'😻',
-	'😼',
-	'😽',
-	'🙀',
-	'😿',
-	'😾',
-	'🙈',
-	'🙉',
-	'🙊',
-	'🐵',
-	'🐶',
-	'🐺',
-	'🐱',
+	'😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '🥰', '😗', '😙', '🥲', '😚', '🙂', '🤗', '🤩', '🤔', '🫡', '🤨', '😐', '😑', '😶', '🫥', '😶‍🌫️', '🙄', '😏', '😣', '😥', '😮', '🤐', '😯', '😪', '😫', '🥱', '😴', '😌', '😛', '😜', '😝', '🤤', '😒', '😓', '😔', '😕', '🫤', '🙃', '🫠', '🤑', '😲', '☹️', '🙁', '😖', '😞', '😟', '😤', '😢', '😭', '😦', '😧', '😨', '😩', '🤯', '😬', '😮‍💨', '😰', '😱', '🥵', '🥶', '😳', '🤪', '😵', '😵‍💫', '🥴', '😠', '😡', '🤬', '😷', '🤒', '🤕', '🤢', '🤮', '🤧', '😇', '🥳', '🥸', '🥺', '🥹', '🤠', '🤡', '🤥', '🫨', '🤫', '🤭', '🫢', '🫣', '🧐', '😈', '👿', '👹', '👺', '💀', '☠️', '👻', '👽', '👾', '🤖', '💩', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾', '🙈', '🙉', '🙊', '🐵', '🐶', '🐺', '🐱'
 ];
 
 var choosenEmoji = '';
@@ -245,10 +117,10 @@ function updateCanvas() {
 
 function updateEmojiPicker() {
 	const emojiButtonWidth = emoji.getBoundingClientRect().width;
-	const emojiPickerWidth = emojiPicker.getBoundingClientRect().width;
+	const emojiPickerWrapperWidth = emojiPicker.getBoundingClientRect().width;
 
-	emojiPicker.style.left = `${emoji.getBoundingClientRect().right - (emojiButtonWidth / 2) - (emojiPickerWidth / 2)}px`;
-	emojiPicker.style.top = `${emoji.getBoundingClientRect().bottom + 12}px`;
+	emojiPickerWrapper.style.left = `${emoji.getBoundingClientRect().right - (emojiButtonWidth / 2) - (emojiPickerWrapperWidth / 2)}px`;
+	emojiPickerWrapper.style.top = `${emoji.getBoundingClientRect().bottom}px`;
 }
 
 function chooseEmojiRandomly() {
@@ -258,24 +130,12 @@ function chooseEmojiRandomly() {
 function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-	// ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
 	ctx.font = `${scale}px serif`;
 
 	const textWidth = ctx.measureText(choosenEmoji).width;
 	ctx.fillText(choosenEmoji, canvas.width / 2 - textWidth / 2, canvas.height / 2);
 
-	/*
-	if (scale == 300.0) {
-		turn = true;
-	}
-	
-	if (scale == 0) {
-		turn = false;
-	}
-	
-	scale = (turn ? scale - 0.5 : scale + 0.5);
-	*/
 
 	requestAnimationFrame(draw);
 }
@@ -284,9 +144,6 @@ generateEmojis();
 updateCanvas();
 draw();
 
-//setInterval(chooseEmojiRandomly, 1000);
-
-//
 
 function chooseEmoji(newEmoji) {
 	emoji.innerHTML = newEmoji;
