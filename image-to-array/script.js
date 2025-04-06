@@ -6,7 +6,7 @@ const browseFile = document.getElementById("browseFile");
 
 const urlInput = document.getElementById("url");
 const convert = document.getElementById("convert");
-let output = document.getElementById("output");
+const output = document.getElementById("output");
 
 const highlightCheckbox = document.getElementById("highlightCheckbox");
 const downloadImmediatelyCheckbox = document.getElementById("downloadImmediatelyCheckbox");
@@ -107,14 +107,12 @@ function toArray() {
 		let lines = [];
 
 		lines.push(
-			"using pixel = unsigned char;",
-			`const unsigned int imageWidth = ${width};`,
-			`const unsigned int imageHeight = ${height};`,
-			"const pixel bytes = 4;", "",
-			"pixel imageArray[imageWidth * imageHeight * bytes] = {"
+			`#define IMAGE_WIDTH ${width}`,
+			`#define IMAGE_HEIGHT ${height}`,
+			"#define IMAGE_COLOR_COMPONENTS_BYTE_SIZE 4",
+			"#define IMAGE_ARRAY_SIZE (IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_COLOR_COMPONENTS_BYTE_SIZE)", "",
+			"unsigned char imageArray[IMAGE_ARRAY_SIZE] = {"
 		);
-
-		let i = 0, offset;
 
 		const off = (i, size, off) => i * 4 + off;
 
