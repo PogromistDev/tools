@@ -15,23 +15,30 @@
 		<div id="main-page-container">
 			<a href="../"><button style="margin: 0px;">tools</button></a>
 		</div>
-		<input id="urlRadio" type="radio" name="group1">Url
-		<input id="fileRadio" type="radio" name="group1" checked>File
+		<div id="toolbar">
+			<div id="toolbar-container" style="min-width: 1040px;">
+				<input id="urlRadio" type="radio" name="group1">Url
+				<input id="fileRadio" type="radio" name="group1" checked>File
 
-		<input id="fileBrowser" type="file" hidden>
-		<input id="url" type="text" placeholder="paste url" hidden>
+				<input id="fileBrowser" type="file" hidden>
+				<input id="url" type="text" placeholder="paste url" hidden>
 
-		<button id="browseFile">...</button>
+				<button id="browseFile">...</button>
 
-		<button id="convert">
-			<span style="color: #c5c576;">ToArray<span style="color: black;">&lt;<span style="color: #466dde;">byte</span>&gt;();</span></span>
-		</button>
+				<button id="convert">
+					<span style="color: #c5c576;">ToArray<span style="color: black;">&lt;<span style="color: #466dde;">byte</span>&gt;();</span></span>
+				</button>
 
-		<label style="margin-left: 16px;"><input id="highlightCheckbox" type="checkbox">Syntax highlighting</label>
-		<label style="margin-left: 16px;"><input id="downloadImmediatelyCheckbox" type="checkbox">Download immediately</label>
+				<input id="highlightCheckbox" type="checkbox" style="margin-left: 16px;margin-right: 6px;">
+				<label for="highlightCheckbox">Syntax highlighting</label>
 
-		<a id="save-to-file-a" download="image-array.hpp" style="margin-left: auto;"><button id="save-to-file">save to file</button></a>
-		<button id="copy-to-clipboard">copy to clipboard</button>
+				<input id="downloadImmediatelyCheckbox" type="checkbox" style="margin-left: 16px;margin-right: 6px;">
+				<label for="downloadImmediatelyCheckbox">Download immediately</label>
+
+				<a id="save-to-file-a" download="image-array.hpp" style="margin-left: auto;"><button id="save-to-file">save to file</button></a>
+				<button id="copy-to-clipboard">copy to clipboard</button>
+			</div>
+		</div>
 	</header>
 
 	<pre id="pre-output"><code id="output" class="cpp"></code></pre>
