@@ -2,6 +2,10 @@ body {
 	background-image: url(transparency_light.png);
 }
 
+header {
+    position: fixed;
+}
+
 #range {
 	margin-right: 20px;
 }
