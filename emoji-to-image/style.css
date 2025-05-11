@@ -3,7 +3,7 @@ body {
 }
 
 #range {
-	width: 192px;
+	margin-right: 20px;
 }
 
 #shadow {
@@ -13,8 +13,6 @@ body {
     width: 100vw;
     height: 100vh;
 }
-
-
 
 #emoji-picker-wrapper {
     position: absolute;
@@ -102,4 +100,9 @@ body {
 	padding: 10px;
     max-height: 320px;
     overflow-y: scroll;
+}
+
+#canvas {
+    position: absolute;
+    z-index: -1;
 }

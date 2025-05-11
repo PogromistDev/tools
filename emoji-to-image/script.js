@@ -109,18 +109,22 @@ function generateEmojis() {
 }
 
 function updateCanvas() {
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
+	canvas.width = window.outerWidth;
+	canvas.height = window.outerHeight;
 
 	updateEmojiPicker();
 }
 
 function updateEmojiPicker() {
-	const emojiButtonWidth = emoji.getBoundingClientRect().width;
+	const emojiBoundingRect = emoji.getBoundingClientRect();
+
+	const emojiButtonWidth = emojiBoundingRect.width;
 	const emojiPickerWrapperWidth = emojiPicker.getBoundingClientRect().width;
 
-	emojiPickerWrapper.style.left = `${emoji.getBoundingClientRect().right - (emojiButtonWidth / 2) - (emojiPickerWrapperWidth / 2)}px`;
-	emojiPickerWrapper.style.top = `${emoji.getBoundingClientRect().bottom}px`;
+	const newLeft = emojiBoundingRect.right - (emojiButtonWidth / 2) - (emojiPickerWrapperWidth / 2);
+
+	emojiPickerWrapper.style.left = `${newLeft}px`;
+	emojiPickerWrapper.style.top = `${emojiBoundingRect.bottom}px`;
 }
 
 function chooseEmojiRandomly() {
@@ -134,8 +138,7 @@ function draw() {
 	ctx.font = `${scale}px serif`;
 
 	const textWidth = ctx.measureText(choosenEmoji).width;
-	ctx.fillText(choosenEmoji, canvas.width / 2 - textWidth / 2, canvas.height / 2);
-
+	ctx.fillText(choosenEmoji, canvas.width / 2 - textWidth / 2, canvas.height / 2 + 58);
 
 	requestAnimationFrame(draw);
 }
