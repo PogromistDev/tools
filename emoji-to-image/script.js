@@ -121,7 +121,11 @@ function updateEmojiPicker() {
 	const emojiButtonWidth = emojiBoundingRect.width;
 	const emojiPickerWrapperWidth = emojiPicker.getBoundingClientRect().width;
 
-	const newLeft = emojiBoundingRect.right - (emojiButtonWidth / 2) - (emojiPickerWrapperWidth / 2);
+	let newLeft = emojiBoundingRect.right - (emojiButtonWidth / 2) - (emojiPickerWrapperWidth / 2);
+
+	if ((newLeft < 0) || ((newLeft + emojiPickerWrapperWidth) > window.innerWidth)) {
+		newLeft = (window.innerWidth / 2) - (emojiPickerWrapperWidth / 2);
+	}
 
 	emojiPickerWrapper.style.left = `${newLeft}px`;
 	emojiPickerWrapper.style.top = `${emojiBoundingRect.bottom}px`;
